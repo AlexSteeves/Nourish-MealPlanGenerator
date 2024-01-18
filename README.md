@@ -9,5 +9,6 @@
 
 
 ##### The Axios library is used to send prompts to GPT3.5-turbo
+##### Redux used for state management.
 
 You can try out Nourish at: https://main.d3b1jgsyiirx9q.amplifyapp.com/
