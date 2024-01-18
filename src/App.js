@@ -11,7 +11,7 @@ function App() {
   };
 
   return (
-    <div className="bg-slate-800 w-[100vw] h-[100vh] flex">
+    <div className="body w-[100vw] h-[100vh] flex">
       <div className="flex-1 sticky top-0" style={{ height: 'fit-content', zIndex: 100 }}>
         <Main mealPlan={mealPlan} updateMealPlan={updateMealPlan} />
       </div>

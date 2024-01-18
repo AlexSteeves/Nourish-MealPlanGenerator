@@ -3,29 +3,24 @@ import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
 
 const mealTypes = [
-  '1',
-  '2',
-  '3',
-  '4',
-  '5',
-  '6',
-  '7',
-  '8',
+  'evenly',
+  'at night',
+  'in the morning',
 ];
 
-// Define classNames function
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function DropDownMealsPerDay({ onMealPerDayChange }) {
+export default function DropDownCaloriesSpread({ onCalorieChange }) {
 
 
   const [selected, setSelected] = useState(mealTypes[0]);
   const handleChange = (newSelected) => {
     setSelected(newSelected);
-    if (onMealPerDayChange) {
-      onMealPerDayChange(newSelected);
+    if (onCalorieChange) {
+      onCalorieChange(newSelected);
     }
   }
   
@@ -33,9 +28,9 @@ export default function DropDownMealsPerDay({ onMealPerDayChange }) {
     <Listbox value={selected} onChange={handleChange}>
       {({ open }) => (
         <div className = "flex flex-col p-4">
-          <Listbox.Label className="block  leading-6"><span className = "primary-text">Meals per Day: </span></Listbox.Label>
+          <Listbox.Label className="block text-sm  leading-6 text-slate-200"><span className = "primary-text">Calorie Spread: </span></Listbox.Label>
           <div className="relative mt-2 w-[10vw]">
-            <Listbox.Button className="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6">
+            <Listbox.Button className=" relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6">
               <span className="block truncate">{selected}</span>
               <span className="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
                 <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />

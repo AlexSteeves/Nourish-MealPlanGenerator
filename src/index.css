@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+@layer components {
+    .primary-text{
+      @apply text-xl text-slate-200 font-normal 
+    }
+    .large-text {
+        @apply text-3xl text-slate-200 font-normal drop-shadow-lg
+    }
+    .body {
+      @apply bg-[#242582]
+    }
+  }

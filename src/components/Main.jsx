@@ -3,16 +3,20 @@ import axios from "axios";
 import DropDownMealsPerDay from "./DropDownMealsPerDay";
 import DropDownMealPlan from "./DropDownMealPlan";
 import MealLoading from "./MealLoading";
+import CalorieSpread from './DropDownCaloriesSpread';
+import UnitSwitch from './UnitsSwitch'
+import TotalDailyCalories from "./TotalDailyCalories";
 
 const Main = ({ updateMealPlan }) => {
     const [mealType, setMealType] = useState("");
     const [totalCalories, setTotalCalories] = useState(0);
     const [totalMealsPerDay, setTotalMealsPerDay] = useState(null);
     const [caloriesSpread, setCaloriesSpread] = useState("");
-    const [generatedPrompt, setGeneratedPrompt] = useState("");
+    const [currentUnit, setCurrentUnit] = useState("Metric");
     const [isLoading, setIsLoading] = useState(false);
 
     const handleGeneratePrompt = async () => {
+       
         if (
             !mealType ||
             totalCalories <= 0 ||
@@ -27,7 +31,7 @@ const Main = ({ updateMealPlan }) => {
             return;
         }
 
-        const prompt = `Create a concise meal plan for a ${mealType} diet. Total calories: ${totalCalories}. Meals per day: ${totalMealsPerDay}. Calorie distribution: ${caloriesSpread}. Format: Title of each meal with estimated calories, followed by a bullet-point list of ingredients. The titles should be bolded. Conclude with a cumulative list of ingredients for the entire day.`;
+        const prompt = `Create a concise meal plan for a ${mealType} diet. The total calories of the plan are: ${totalCalories}. The meals per day: ${totalMealsPerDay}. The calories should be focused: ${caloriesSpread}. Format: Title of each meal with estimated calories, followed by a bullet-point list of ingredients. Conclude with a cumulative list of ingredients for the entire day. All units should be in ${currentUnit}.`;
 
         setIsLoading(true);
         try {
@@ -61,65 +65,49 @@ const Main = ({ updateMealPlan }) => {
     const handleMealPerDayChange = (selectedMeals) => {
         setTotalMealsPerDay(selectedMeals);
     };
+    const handleCalorieSpread = (selectedMeals) => {
+        setCaloriesSpread(selectedMeals);
+    };
+    const handleTotalDailyCalories = (totalCalories) => {
+        setTotalCalories(totalCalories)
+    };
+    const handleUnitSwitch = (currentUnit) =>{
+        setCurrentUnit(currentUnit);
+        
+        
+    };
 
     return (
-        <div className="bg-slate-800 text-white p-4 flex flex-col items-center">
+        <div className="p-4 pt-20 flex flex-col items-center">
+            <div className = "flex flex-row">
             <DropDownMealPlan onMealTypeChange={handleMealTypeChange} />
-
             
-
-            <div>
-                <form class="max-w-sm mx-auto">
-                    <label
-                        for="number-input"
-                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                    >
-                        Total Daily Calories: 
-                    </label>
-                    <input
-                        onChange={(e) =>
-                            setTotalCalories(parseInt(e.target.value))
-                        }
-                        type="number"
-                        id="number-input"
-                        aria-describedby="helper-text-explanation"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-slate-800 dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="2000"
-                        required
-                    />
-                </form>
+            <TotalDailyCalories  totalCalories={handleTotalDailyCalories} />
             </div>
 
-            <div className="mb-4">
-                <DropDownMealsPerDay
-                    onMealPerDayChange={handleMealPerDayChange}
-                />
+            <div className = "flex flex-row">
+            <DropDownMealsPerDay className = 'mr-4' onMealPerDayChange={handleMealPerDayChange} />
+            <CalorieSpread onCalorieChange={handleCalorieSpread} />
             </div>
 
-            <div className="mb-4">
-                <label>Calories Spread:</label>
-                <select
-                    onChange={(e) => setCaloriesSpread(e.target.value)}
-                    className="bg-transparent text-white border border-white p-2"
-                >
-                    <option value="">Select</option>
-                    <option value="morning">Morning</option>
-                    <option value="evenly">Evenly Throughout the Day</option>
-                    <option value="night">Night</option>
-                </select>
+            <div className = "w-full flex justify-center items-center">
+                <UnitSwitch currentUnit = {handleUnitSwitch}/>
             </div>
+            
+           
 
-            <div className="flex flex-row m-4">
+            <div className="flex flex-row w-full m-4 items-center justify-center">
                 <button
                     onClick={handleGeneratePrompt}
                     type="button"
-                    class="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+                    className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
                 >
-                    Generate Meal Plan{" "}
+                    Generate Meal Plan
                 </button>
 
                 {isLoading && <MealLoading />}
             </div>
+            
         </div>
     );
 };
