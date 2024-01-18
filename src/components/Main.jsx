@@ -3,20 +3,20 @@ import axios from "axios";
 import DropDownMealsPerDay from "./DropDownMealsPerDay";
 import DropDownMealPlan from "./DropDownMealPlan";
 import MealLoading from "./MealLoading";
-import CalorieSpread from './DropDownCaloriesSpread';
-import UnitSwitch from './UnitsSwitch'
+import CalorieSpread from "./DropDownCaloriesSpread";
+import UnitSwitch from "./UnitsSwitch";
 import TotalDailyCalories from "./TotalDailyCalories";
+import Footer from './Footer';
 
 const Main = ({ updateMealPlan }) => {
-    const [mealType, setMealType] = useState("");
-    const [totalCalories, setTotalCalories] = useState(0);
-    const [totalMealsPerDay, setTotalMealsPerDay] = useState(null);
-    const [caloriesSpread, setCaloriesSpread] = useState("");
+    const [mealType, setMealType] = useState("Keto");
+    const [totalCalories, setTotalCalories] = useState(2000);
+    const [totalMealsPerDay, setTotalMealsPerDay] = useState(1);
+    const [caloriesSpread, setCaloriesSpread] = useState("Evenly");
     const [currentUnit, setCurrentUnit] = useState("Metric");
     const [isLoading, setIsLoading] = useState(false);
 
     const handleGeneratePrompt = async () => {
-       
         if (
             !mealType ||
             totalCalories <= 0 ||
@@ -69,32 +69,34 @@ const Main = ({ updateMealPlan }) => {
         setCaloriesSpread(selectedMeals);
     };
     const handleTotalDailyCalories = (totalCalories) => {
-        setTotalCalories(totalCalories)
+        setTotalCalories(totalCalories);
     };
-    const handleUnitSwitch = (currentUnit) =>{
+    const handleUnitSwitch = (currentUnit) => {
         setCurrentUnit(currentUnit);
-        
-        
     };
 
     return (
         <div className="p-4 pt-20 flex flex-col items-center">
-            <div className = "flex flex-row">
-            <DropDownMealPlan onMealTypeChange={handleMealTypeChange} />
-            
-            <TotalDailyCalories  totalCalories={handleTotalDailyCalories} />
+            <div className="top-0 fixed p-5">
+                <span className = "font-light text-slate-100 text-3xl">Please Select Your Ideal Meal Plan</span>
+            </div>
+            <div className="flex flex-row">
+                <DropDownMealPlan onMealTypeChange={handleMealTypeChange} />
+
+                <TotalDailyCalories totalCalories={handleTotalDailyCalories} />
             </div>
 
-            <div className = "flex flex-row">
-            <DropDownMealsPerDay className = 'mr-4' onMealPerDayChange={handleMealPerDayChange} />
-            <CalorieSpread onCalorieChange={handleCalorieSpread} />
+            <div className="flex flex-row">
+                <DropDownMealsPerDay
+                    className="mr-4"
+                    onMealPerDayChange={handleMealPerDayChange}
+                />
+                <CalorieSpread onCalorieChange={handleCalorieSpread} />
             </div>
 
-            <div className = "w-full flex justify-center items-center">
-                <UnitSwitch currentUnit = {handleUnitSwitch}/>
+            <div className="w-full flex justify-center items-center">
+                <UnitSwitch currentUnit={handleUnitSwitch} />
             </div>
-            
-           
 
             <div className="flex flex-row w-full m-4 items-center justify-center">
                 <button
@@ -107,7 +109,10 @@ const Main = ({ updateMealPlan }) => {
 
                 {isLoading && <MealLoading />}
             </div>
+
             
+
+            <Footer />
         </div>
     );
 };

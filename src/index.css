@@ -6,12 +6,15 @@
 
 @layer components {
     .primary-text{
-      @apply text-xl text-slate-200 font-normal 
+      @apply text-xl text-slate-200 font-light 
     }
     .large-text {
-        @apply text-3xl text-slate-200 font-normal drop-shadow-lg
+        @apply text-3xl text-slate-200 font-light drop-shadow-lg
     }
     .body {
       @apply bg-[#242582]
+    }
+    .generated-text {
+      @apply text-slate-100 font-light text-base
     }
   }
