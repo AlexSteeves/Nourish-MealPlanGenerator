@@ -6,22 +6,45 @@ import MealLoading from "./MealLoading";
 import CalorieSpread from "./DropDownCaloriesSpread";
 import UnitSwitch from "./UnitsSwitch";
 import TotalDailyCalories from "./TotalDailyCalories";
-import Footer from "./Footer";
 
-const Main = ({ updateMealPlan }) => {
-    const [mealType, setMealType] = useState("Keto");
-    const [totalCalories, setTotalCalories] = useState(2000);
-    const [totalMealsPerDay, setTotalMealsPerDay] = useState(1);
-    const [caloriesSpread, setCaloriesSpread] = useState("Evenly");
-    const [currentUnit, setCurrentUnit] = useState("Metric");
-    const [isLoading, setIsLoading] = useState(false);
+
+import { connect } from 'react-redux';
+import {
+  setMealType,
+  setTotalCalories,
+  setTotalMealsPerDay,
+  setCaloriesSpread,
+  setCurrentUnit,
+  setIsLoading
+ 
+} from '../Redux/actions';
+
+
+
+const Main = ({ mealType,
+    totalCalories,
+    totalMealsPerDay,
+    calorieSpread,
+    currentUnit,
+    isLoading,
+    setMealType,
+    setTotalCalories,
+    setTotalMealsPerDay,
+    setCaloriesSpread,
+    setCurrentUnit,
+    setIsLoading, 
+    updateMealPlan }) => {
+
+
+
+    
 
     const handleGeneratePrompt = async () => {
         if (
             !mealType ||
             totalCalories <= 0 ||
             !totalMealsPerDay ||
-            !caloriesSpread
+            !calorieSpread
         ) {
             console.error("All fields must be filled in");
 
@@ -31,7 +54,7 @@ const Main = ({ updateMealPlan }) => {
             return;
         }
 
-        const prompt = `Create a concise meal plan for a ${mealType} diet. The total calories of the plan are: ${totalCalories}. The meals per day: ${totalMealsPerDay}. If there is a 1 meal, make sure it contains all of the total calories. The calories should be focused: ${caloriesSpread}. Format: Title of each meal with estimated calories, followed by a bullet-point list of ingredients. Conclude with a cumulative list of ingredients for the entire day. All units should be in ${currentUnit}.`;
+        const prompt = `Create a concise meal plan for a ${mealType} diet. The total calories of the plan are: ${totalCalories}. The meals per day: ${totalMealsPerDay}. If there is a 1 meal, make sure it contains all of the total calories. The calories should be focused: ${calorieSpread}. Format: Title of each meal with estimated calories, followed by a bullet-point list of ingredients. Conclude with a cumulative list of ingredients for the entire day. All units should be in ${currentUnit}.`;
 
         setIsLoading(true);
         try {
@@ -116,4 +139,26 @@ const Main = ({ updateMealPlan }) => {
     );
 };
 
-export default Main;
+
+// Map Redux state to component props
+const mapStateToProps = (state) => ({
+    mealType: state.mealPlan.mealType,
+    totalCalories: state.mealPlan.totalCalories,
+    totalMealsPerDay: state.mealPlan.totalMealsPerDay,
+    calorieSpread: state.mealPlan.calorieSpread,
+    currentUnit: state.mealPlan.currentUnit,
+    isLoading: state.mealPlan.isLoading
+  });
+  
+  // Map Redux actions to component props
+  const mapDispatchToProps = {
+    setMealType,
+    setTotalCalories,
+    setTotalMealsPerDay,
+    setCaloriesSpread,
+    setCurrentUnit,
+    setIsLoading
+    // other actions
+  };
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(Main);
