@@ -31,7 +31,7 @@ const Main = ({ updateMealPlan }) => {
             return;
         }
 
-        const prompt = `Create a concise meal plan for a ${mealType} diet. The total calories of the plan are: ${totalCalories}. The meals per day: ${totalMealsPerDay}. The calories should be focused: ${caloriesSpread}. Format: Title of each meal with estimated calories, followed by a bullet-point list of ingredients. Conclude with a cumulative list of ingredients for the entire day. All units should be in ${currentUnit}.`;
+        const prompt = `Create a concise meal plan for a ${mealType} diet. The total calories of the plan are: ${totalCalories}. The meals per day: ${totalMealsPerDay}. If there is a 1 meal, make sure it contains all of the total calories. The calories should be focused: ${caloriesSpread}. Format: Title of each meal with estimated calories, followed by a bullet-point list of ingredients. Conclude with a cumulative list of ingredients for the entire day. All units should be in ${currentUnit}.`;
 
         setIsLoading(true);
         try {

@@ -21,7 +21,7 @@ function App() {
                     <GeneratedMealPlan mealPlan={mealPlan} />
                 </div>
             </div>
-            <div className = "w-full h-[5vh] body">
+            <div className = "w-full lg:h-[5vh] body">
             <Footer />
             </div>
            

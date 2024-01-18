@@ -9,7 +9,7 @@ function GeneratedMealPlan({ mealPlan }) {
                 </h3>
             </div>
 
-            <div className="overflow-y-auto h-[90vh]">
+            <div className="lg:overflow-y-auto h-[90vh] p-3">
                 <p className="generated-text p-2 whitespace-pre-wrap">
                     {mealPlan}
                 </p>
