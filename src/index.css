@@ -9,7 +9,7 @@
       @apply text-xl text-slate-200 font-light 
     }
     .large-text {
-        @apply text-3xl text-slate-200 font-light drop-shadow-lg
+        @apply text-xl lg:text-3xl text-slate-200 font-light drop-shadow-lg
     }
     .body {
       @apply bg-[#242582]

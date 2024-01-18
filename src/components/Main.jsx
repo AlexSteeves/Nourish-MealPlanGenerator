@@ -6,7 +6,7 @@ import MealLoading from "./MealLoading";
 import CalorieSpread from "./DropDownCaloriesSpread";
 import UnitSwitch from "./UnitsSwitch";
 import TotalDailyCalories from "./TotalDailyCalories";
-import Footer from './Footer';
+import Footer from "./Footer";
 
 const Main = ({ updateMealPlan }) => {
     const [mealType, setMealType] = useState("Keto");
@@ -77,18 +77,19 @@ const Main = ({ updateMealPlan }) => {
 
     return (
         <div className="p-4 pt-20 flex flex-col items-center">
-            <div className="top-0 fixed p-5">
-                <span className = "font-light text-slate-100 text-3xl">Please Select Your Ideal Meal Plan</span>
+            <div className="absolute top-0 p-5">
+                <span className="large-text">
+                    Please Select Your Ideal Meal Plan
+                </span>
             </div>
-            <div className="flex flex-row">
+            <div className="flex flex-col md:flex-row">
                 <DropDownMealPlan onMealTypeChange={handleMealTypeChange} />
-
                 <TotalDailyCalories totalCalories={handleTotalDailyCalories} />
             </div>
 
-            <div className="flex flex-row">
+            <div className="flex flex-col md:flex-row mt-4">
                 <DropDownMealsPerDay
-                    className="mr-4"
+                    className="mb-4 md:mb-0 md:mr-4"
                     onMealPerDayChange={handleMealPerDayChange}
                 />
                 <CalorieSpread onCalorieChange={handleCalorieSpread} />
@@ -110,9 +111,7 @@ const Main = ({ updateMealPlan }) => {
                 {isLoading && <MealLoading />}
             </div>
 
-            
-
-            <Footer />
+           
         </div>
     );
 };

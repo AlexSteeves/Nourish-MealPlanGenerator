@@ -34,7 +34,7 @@ export default function DropDownMealsPerDay({ onMealPerDayChange }) {
       {({ open }) => (
         <div className = "flex flex-col p-4">
           <Listbox.Label className="block  leading-6"><span className = "primary-text">Meals per Day: </span></Listbox.Label>
-          <div className="relative mt-2 w-[10vw]">
+          <div className="relative mt-2 w-full lg:w-[10vw]">
             <Listbox.Button className="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6">
               <span className="block truncate">{selected}</span>
               <span className="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
