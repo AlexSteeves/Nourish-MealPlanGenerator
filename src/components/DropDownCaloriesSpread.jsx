@@ -25,11 +25,12 @@ export default function DropDownCaloriesSpread({ onCalorieChange }) {
   }
   
   return (
-    <Listbox value={selected} onChange={handleChange}>
+    <div className = "w-full">
+<Listbox value={selected} onChange={handleChange}>
       {({ open }) => (
-        <div className = "flex flex-col p-4">
-          <Listbox.Label className="block text-sm  leading-6 text-slate-200"><span className = "primary-text">Calorie Spread: </span></Listbox.Label>
-          <div className="relative mt-2 w-full lg:w-[10vw]">
+        <div className = "flex flex-col ">
+          <Listbox.Label className="block text-sm leading-6 text-slate-200"><span className = "primary-text">Calorie Spread: </span></Listbox.Label>
+          <div className="relative mt-2 w-full ">
             <Listbox.Button className=" relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6">
               <span className="block truncate">{selected}</span>
               <span className="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
@@ -87,5 +88,8 @@ export default function DropDownCaloriesSpread({ onCalorieChange }) {
         </div>
       )}
     </Listbox>
+
+    </div>
+    
   );
 }

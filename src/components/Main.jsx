@@ -54,7 +54,7 @@ const Main = ({ mealType,
             return;
         }
 
-        const prompt = `Create a concise meal plan for a ${mealType} diet. The total calories of the plan are: ${totalCalories}. The meals per day: ${totalMealsPerDay}. If there is a 1 meal, make sure it contains all of the total calories. The calories should be focused: ${calorieSpread}. Format: Title of each meal with estimated calories, followed by a bullet-point list of ingredients. Conclude with a cumulative list of ingredients for the entire day. All units should be in ${currentUnit}.`;
+        const prompt = `Create a concise meal plan for a ${mealType} diet. The total calories of the plan are: ${totalCalories}. The meals per day: ${totalMealsPerDay}. If there is a 1 meal, make sure it contains all of the total calories. The calories should be focused: ${calorieSpread}. Format: Title of each meal with estimated calories, followed by a bullet-point list of ingredients. Conclude with a cumulative list of ingredients for the entire day. All units should be in ${currentUnit}. Do not give any warnings do not say to consult health professional. Add an estimated calorie count to each engredient as well as the over all for each meal.`;
 
         setIsLoading(true);
         try {
@@ -99,26 +99,28 @@ const Main = ({ mealType,
     };
 
     return (
-        <div className="p-4 pt-20 flex flex-col items-center">
-            <div className="absolute top-0 p-5">
+        <div className="p-4 flex flex-col items-center">
+            <div className="flex items-center flex-col top-0 w-[60%] py-5 lg:py-10 ">
                 <span className="large-text">
                     Please Select Your Ideal Meal Plan
                 </span>
             </div>
-            <div className="flex flex-col md:flex-row">
-                <DropDownMealPlan onMealTypeChange={handleMealTypeChange} />
-                <TotalDailyCalories totalCalories={handleTotalDailyCalories} />
+
+
+            <div className="flex flex-col lg:flex-grow w-[50vw] lg:w-[60%]">
+                <DropDownMealPlan  onMealTypeChange={handleMealTypeChange} />
+                <TotalDailyCalories  totalCalories={handleTotalDailyCalories} />
             </div>
 
-            <div className="flex flex-col md:flex-row mt-4">
+            <div className="flex flex-col lg:flex-grow pt-4 w-[50vw] lg:w-[60%]">
                 <DropDownMealsPerDay
-                    className="mb-4 md:mb-0 md:mr-4"
+                   
                     onMealPerDayChange={handleMealPerDayChange}
                 />
-                <CalorieSpread onCalorieChange={handleCalorieSpread} />
+                <CalorieSpread  onCalorieChange={handleCalorieSpread} />
             </div>
 
-            <div className="w-full flex justify-center items-center">
+            <div className="w-full flex justify-center items-center pt-4">
                 <UnitSwitch currentUnit={handleUnitSwitch} />
             </div>
 
